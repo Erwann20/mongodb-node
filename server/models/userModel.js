@@ -18,7 +18,19 @@ const UsersModel = new Schema(
         date: {
             type: Date,
             default: Date.now
-        }
+        },
+        city: {
+            type: String,
+            required: true
+        },
+        birthday: {
+            type: Date,
+            required: true
+        },
+        sexe: {
+            type: String,
+            required: true
+        },
     }, {
         timestamps: true,
         collection: 'users'

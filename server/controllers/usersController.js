@@ -7,7 +7,7 @@ const { createJWT } = require("../utils/auth");
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 exports.signup = (req, res, next) => {
-    let { name, email, password, password_confirmation } = req.body;
+    let { name, email, password, password_confirmation, date, birthday, city, sexe } = req.body;
     let errors = [];
 
     if (!name) {
@@ -27,6 +27,19 @@ exports.signup = (req, res, next) => {
     } if (errors.length > 0) {
         return res.status(422).json({ errors: errors });
     }
+    if (!date) {
+        errors.push({date: "required"})
+    }
+    if (!birthday) {
+        errors.push({birthday: "required"})
+    }
+    if (!city) {
+        errors.push({city: "required"})
+    }
+    if (!sexe) {
+        errors.push({sexe: "required"})
+    }
+
     User.findOne({ email: email })
         .then(user => {
             if (user) {
@@ -36,6 +49,10 @@ exports.signup = (req, res, next) => {
                     name: name,
                     email: email,
                     password: password,
+                    date: date,
+                    birthday: birthday,
+                    city: city,
+                    sexe: sexe
                 }); bcrypt.genSalt(10, function (err, salt) {
                     bcrypt.hash(password, salt, function (err, hash) {
                         if (err) throw err;

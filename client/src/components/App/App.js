@@ -34,6 +34,18 @@ const AppContainer = ({userstore}) => {
                        <input onChange={(e) => user.email = e.target.value }/>
                    </div>
                    <div className="form-item">
+                       <label>Date de naissance</label>
+                       <input type="date" onChange={(e) => user.birthday = e.target.value }/>
+                   </div>
+                   <div className="form-item">
+                       <label>Ville</label>
+                       <input  onChange={(e) => user.city = e.target.value }/>
+                   </div>
+                   <div className="form-item">
+                       <label>Sexe</label>
+                       <input onChange={(e) => user.sexe = e.target.value }/>
+                   </div>
+                   <div className="form-item">
                        <label>Mot de passe</label>
                        <input type="password" onChange={(e) => user.password = e.target.value }/>
                    </div>

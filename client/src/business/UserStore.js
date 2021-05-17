@@ -20,9 +20,11 @@ export class UserStore {
             "name": this._userRegister.name,
             "email": this._userRegister.email,
             "password": this._userRegister.password,
-            "password_confirmation": this._userRegister.confirmPassword
+            "password_confirmation": this._userRegister.confirmPassword,
+            "birthday": this._userRegister.birthday,
+            "city": this._userRegister.city,
+            "sexe": this._userRegister.sexe
         }
-
         if (this._userRegister.isValid()) {
             fetch(`http://localhost:5500/auth/signup`, {
                 headers: new Headers({
