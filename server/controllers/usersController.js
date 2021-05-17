@@ -139,3 +139,32 @@ exports.getUsers = (req, res) => {
         else console.log("Error to get data : " + err);
     })
 }
+
+exports.editProfil = (req, res) => {
+    let { name, email } = req.body; 
+    let errors = [];
+    if (!email) {
+        errors.push({ email: "required" });
+    } 
+    if (!emailRegexp.test(email)) {
+        errors.push({ email: "invalid email" });
+    }
+    if (errors.length > 0) {
+        return res.status(422).json({ errors: errors });
+    }
+    let updatedUser = {
+        email: email,
+        name: name
+    }
+    User.findOneAndUpdate(
+        { email: email },
+        { $set: updatedUser},
+        { new: true },
+        (err, docs) => {
+          if (!err) res.send(docs);
+          else console.log("Update error : " + err);
+        }
+    ).catch(err => {
+        res.status(500).json({ erros: err });
+    });
+}
