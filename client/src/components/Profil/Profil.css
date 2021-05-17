@@ -1,0 +1,23 @@
+.pageProfil {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 10px;
+  width: fit-content;
+  padding: 25px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.messageButton {
+  text-align: center;
+  width: 80%;
+  height: 40px;
+  border-radius: 17px;
+  font-size: 17px;
+  border: none;
+  background: linear-gradient(147.09deg, #ffb775 10.95%, #ff7d75 88.02%);
+  margin: 10px 0px;
+  color: white;
+  font-size: 24px;
+}
