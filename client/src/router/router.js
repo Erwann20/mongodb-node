@@ -6,7 +6,14 @@ import App from '../components/App/App';
 import Contact from '../components/Contact/Contact';
 import ListProfil from '../components/ListProfil/ListProfil';
 import Profil from '../components/Profil/Profil';
+import PrivateRoute from './PrivateRoute';
+
 const USER_STORE = new UserStore();
+
+const logout = () => {
+    sessionStorage.removeItem('jwtToken');
+    window.location.href = "/"
+};
 
 const Router = () => {
     return(
@@ -16,15 +23,13 @@ const Router = () => {
                     <Route exact path="/">
                         <App/>
                     </Route>
-                    <Route exact path="/list-profil">
-                        <ListProfil/>
+                    <Route path="/logout">
+                        {
+                            logout
+                        }
                     </Route>
-                    <Route exact path="/profil">
-                        <Profil/>
-                    </Route>
-                    <Route exact path="/contact">
-                        <Contact/>
-                    </Route>
+                    <PrivateRoute exact path="/list-profil" component={ListProfil} />
+                    <PrivateRoute exact path="/profil" component={Profil} />
                 </Switch>
             </Provider>
         </BrowserRouter>
