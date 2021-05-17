@@ -11,8 +11,9 @@ export class UserStore {
     }
 
     get userRegister() {
-        return this._userRegister
+        return this._userRegister;
     }
+
 
     registerUser() {
         const obj = {
@@ -38,11 +39,6 @@ export class UserStore {
 
     loginUser(obj) {
 
-       /* const obj = {
-            "email": this._userRegister.email,
-            "password": this._userRegister.password,
-        }*/
-
         return new Promise((resolve) => {
             fetch(`http://localhost:5500/auth/signin`, {
                 headers: new Headers({
@@ -59,5 +55,18 @@ export class UserStore {
         })
     }
 
-
+    allUsers() {
+        return new Promise((resolve) => {
+            fetch(`http://localhost:5500/auth/users`, {
+                headers: new Headers({
+                                         'Content-Type': 'application/json',
+                                     }),
+                redirect: 'follow',
+                method: 'GET',
+            }).then((e) => e.json())
+              .then((res) => {
+                  resolve(res)
+              });
+        })
+    }
 }

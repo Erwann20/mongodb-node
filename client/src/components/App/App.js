@@ -35,11 +35,11 @@ const AppContainer = ({userstore}) => {
                    </div>
                    <div className="form-item">
                        <label>Mot de passe</label>
-                       <input onChange={(e) => user.password = e.target.value }/>
+                       <input type="password" onChange={(e) => user.password = e.target.value }/>
                    </div>
                    <div className="form-item">
                        <label>Confirmation mot de passe</label>
-                       <input onChange={(e) => user.confirmPassword = e.target.value }/>
+                       <input type="password" onChange={(e) => user.confirmPassword = e.target.value }/>
                    </div>
                    <button onClick={() => userstore.registerUser()}>S'enregistrer</button>
                </div>
@@ -51,7 +51,7 @@ const AppContainer = ({userstore}) => {
                    </div>
                    <div className="form-item">
                        <label>Mot de passe</label>
-                       <input onChange={(e) => setPassword(e.target.value) }/>
+                       <input type="password" onChange={(e) => setPassword(e.target.value) }/>
                    </div>
                     <button onClick={() => loginUser()}>Connexion</button>
                </div>

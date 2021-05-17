@@ -26,7 +26,7 @@ exports.signup = (req, res, next) => {
         errors.push({ password: "mismatch" });
     } if (errors.length > 0) {
         return res.status(422).json({ errors: errors });
-    } 
+    }
     User.findOne({ email: email })
         .then(user => {
             if (user) {
@@ -63,29 +63,29 @@ exports.signup = (req, res, next) => {
 }
 
 exports.signin = (req, res) => {
-    let { email, password } = req.body; 
+    let { email, password } = req.body;
     let errors = [];
     if (!email) {
         errors.push({ email: "required" });
-    } 
+    }
     if (!emailRegexp.test(email)) {
         errors.push({ email: "invalid email" });
-    } 
+    }
     if (!password) {
         errors.push({ passowrd: "required" });
-    } 
+    }
     if (errors.length > 0) {
         return res.status(422).json({ errors: errors });
-    } 
+    }
     User.findOne({ email: email }).then(user => {
         if (!user) {
             return res.status(404).json({
                 errors: [{ user: "not found" }],
             });
         } else {
-            
+
             bcrypt.compare(password, user.password).then(isMatch => {
-                
+
                 if (!isMatch) {
                     return res.status(400).json({
                         errors: [{
@@ -121,8 +121,21 @@ exports.signin = (req, res) => {
 }
 
 exports.getUser = (req, res) => {
-    console.log(req.user);
-    User.findById(req.user.userId)
-        .select('-password')
-        .then(user => res.json(user))
+    User.findOne({ email: req.body.email }).then(user => {
+        if (!user) {
+            return res.status(500).json({ errors: "not exist" });
+        } else {
+            return res.json(user)
+        }
+    })
+}
+
+exports.getUsers = (req, res) => {
+    User.find().then(user => {
+        if (!user) {
+            return res.status(500).json({ errors: "There is no users" });
+        } else {
+            return res.json(user)
+        }
+    })
 }

@@ -4,6 +4,7 @@ import { Provider } from 'mobx-react';
 import {UserStore} from '../business/UserStore';
 import App from '../components/App/App';
 import Contact from '../components/Contact/Contact';
+import ListProfil from '../components/ListProfil/ListProfil';
 import Profil from '../components/Profil/Profil';
 const USER_STORE = new UserStore();
 
@@ -16,9 +17,7 @@ const Router = () => {
                         <App/>
                     </Route>
                     <Route exact path="/list-profil">
-                        <div>
-                            toto
-                        </div>
+                        <ListProfil/>
                     </Route>
                     <Route exact path="/profil">
                         <Profil/>
