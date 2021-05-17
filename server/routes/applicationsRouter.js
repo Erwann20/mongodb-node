@@ -6,7 +6,7 @@ const auth = require("../middleware/auth")
 const { getApplications, addApplication, updateApplication, deleteApplication } = require('../controllers/applicationsController')
 
 //GET all applications
-router.get('/', auth, getApplications);
+router.get('/', getApplications);
 
 //ADD application
 router.post('/', addApplication);
