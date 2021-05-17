@@ -15,6 +15,11 @@ const Router = () => {
                     <Route exact path="/">
                         <App/>
                     </Route>
+                    <Route exact path="/list-profil">
+                        <div>
+                            toto
+                        </div>
+                    </Route>
                     <Route exact path="/profil">
                         <Profil/>
                     </Route>
