@@ -120,9 +120,22 @@ exports.signin = (req, res) => {
     });
 }
 
+//exports.getUser = (req, res) => {
+//    console.log(req.user);
+//    User.findById(req.user.userId)
+//        .select('-password')
+//        .then(user => res.json(user))
+//}
+
 exports.getUser = (req, res) => {
-    console.log(req.user);
-    User.findById(req.user.userId)
+    User.findById(req.body._id)
         .select('-password')
-        .then(user => res.json(user))
+        .then(user => {return res.json(user)})
+}
+
+exports.getUsers = (req, res) => {
+    User.find((err, docs) => {
+        if (!err) res.send(docs);
+        else console.log("Error to get data : " + err);
+    })
 }
