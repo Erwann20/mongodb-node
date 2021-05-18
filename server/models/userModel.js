@@ -18,7 +18,6 @@ const UsersModel = new Schema(
         contacts: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Contact',
-            required: true,
         },
         city: {
             type: String,
