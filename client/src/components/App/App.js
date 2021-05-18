@@ -1,5 +1,5 @@
 import {observer, inject} from 'mobx-react';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,8 +13,11 @@ const AppContainer = ({userstore}) => {
     const user = userstore.userRegister;
     const history = useHistory();
 
-
-
+    useEffect(() => {
+        if (userstore.userIsSave) {
+            loginUser();
+        }
+    }, [userstore.userIsSave])
 
     const loginUser = () => {
          if (email && password) {
@@ -40,7 +43,10 @@ const AppContainer = ({userstore}) => {
                        <TextField  onChange={(e) => user.name = e.target.value  } id="outlined-basic" label="Nom" variant="outlined" />
                    </div>
                    <div className="form-item">
-                       <TextField  onChange={(e) => user.email = e.target.value  } id="outlined-basic" label="Email" variant="outlined" />
+                       <TextField  onChange={(e) => {
+                           user.email = e.target.value
+                           setEmail(e.target.value)
+                       } } id="outlined-basic" label="Email" variant="outlined" />
                    </div>
                    <div className="form-item">
                        <TextField type="date" onChange={(e) => user.birthday = e.target.value  } id="outlined-basic"  variant="outlined" />
@@ -57,7 +63,10 @@ const AppContainer = ({userstore}) => {
                        <TextField type="password" onChange={(e) => user.password = e.target.value  } id="outlined-basic" label="Mot de passe " variant="outlined" />
                    </div>
                    <div className="form-item">
-                       <TextField type="password" onChange={(e) => user.confirmPassword = e.target.value  } id="outlined-basic" label="Confirmation mot de passe" variant="outlined" />
+                       <TextField type="password" onChange={(e) => {
+                           user.confirmPassword = e.target.value
+                           setPassword(e.target.value)
+                       } } id="outlined-basic" label="Confirmation mot de passe" variant="outlined" />
                    </div>
 
                    <Button variant="contained" color="primary" onClick={() => userstore.registerUser()}>

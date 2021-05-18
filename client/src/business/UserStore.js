@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode';
 
 export class UserStore {
     _userRegister;
-    _userIsSave;
+    _userIsSave = false;
 
     constructor() {
         this._userRegister = new User()
@@ -17,6 +17,9 @@ export class UserStore {
 
     set userRegister(user) {
         this._userRegister = user;
+    }
+    get userIsSave() {
+        return this._userIsSave;
     }
 
 
@@ -39,7 +42,7 @@ export class UserStore {
                 method: 'POST',
                 body: JSON.stringify(obj),
             }).then((e) => {
-                this._userIsSave = e.code
+                this._userIsSave = e.ok
             })
         }
     }
