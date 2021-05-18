@@ -1,4 +1,5 @@
 import React from "react"
+
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import {UserStore} from '../business/UserStore';
@@ -7,6 +8,7 @@ import Contact from '../components/Contact/Contact';
 import ListProfil from '../components/ListProfil/ListProfil';
 import Profil from '../components/Profil/Profil';
 import PrivateRoute from './PrivateRoute';
+import NavBar from '../components/NavBar/NavBar'
 
 const USER_STORE = new UserStore();
 
@@ -19,6 +21,7 @@ const Router = () => {
     return(
         <BrowserRouter>
             <Provider userstore={USER_STORE}>
+                <NavBar/>
                 <Switch>
                     <Route exact path="/">
                         <App/>

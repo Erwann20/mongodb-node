@@ -1,0 +1,24 @@
+.formRegister .form-item {
+    margin-bottom: 1rem;
+}
+
+.formRegister .form-item  .MuiTextField-root {
+    width: 30vh !important;
+}
+
+.formRegister Button {
+    width: 100% !important;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+.formRegister {
+    margin-top: 70%;
+}
+
+.toggleForm {
+    text-align: center;
+}
+.toggleForm a {
+    cursor: pointer;
+}

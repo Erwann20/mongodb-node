@@ -20,10 +20,6 @@ const UsersModel = new Schema(
             ref: 'Contact',
             required: true,
         },
-        date: {
-            type: Date,
-            default: Date.now
-        },
         city: {
             type: String,
             required: true
