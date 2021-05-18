@@ -75,6 +75,24 @@ export class UserStore {
         })
     }
 
+    getUserByEmail(email) {
+        return new Promise((resolve) => {
+            fetch(`http://localhost:5500/auth/userByEmail`, {
+                headers: new Headers({
+                     'Content-Type': 'application/json',
+                 }),
+                redirect: 'follow',
+                method: 'POST',
+                body: JSON.stringify({
+                     'email': email
+                 }),
+            }).then((e) => e.json())
+              .then((res) => {
+                  resolve(res)
+              });
+        })
+    }
+
     getCurrentUser() {
         return new Promise((resolve) => {
             fetch(`http://localhost:5500/auth/userByEmail`, {

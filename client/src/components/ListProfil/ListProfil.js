@@ -5,11 +5,13 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Redirect } from 'react-router-dom';
 
 import "./ListProfil.css"
 
 const ListProfilContainer = ({userstore}) => {
-    const [users, setUsers] = useState()
+    const [users, setUsers] = useState();
+    const [redirect, setRedirect] = useState();
 
     useEffect(() => {
         userstore.allUsers().then(e=> {
@@ -28,8 +30,22 @@ const ListProfilContainer = ({userstore}) => {
         })
     }
 
+    const redirectSpecifyProfil = (email) => {
+        userstore.getUserByEmail(email).then((user) => {
+            if (user) {
+                setRedirect(<Redirect
+                        to={{
+                            pathname: '/profil/',
+                            state: { user },
+                        }}
+                />);
+            }
+        })
+    }
+
     return(
             <div className="listProfil">
+                    { redirect && redirect}
                     {
 
                         Array.isArray(users) && users.map((user, index)=> (
@@ -49,7 +65,7 @@ const ListProfilContainer = ({userstore}) => {
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button size="small">Voir le profil</Button>
+                                        <Button onClick={() => redirectSpecifyProfil(user.email)}  size="small">Voir le profil</Button>
                                     </CardActions>
                                 </Card>
 
