@@ -1,5 +1,11 @@
 import {inject, observer} from 'mobx-react';
 import React, {useEffect, useState} from 'react';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
 import "./ListProfil.css"
 
 const ListProfilContainer = ({userstore}) => {
@@ -13,18 +19,29 @@ const ListProfilContainer = ({userstore}) => {
 
     return(
             <div className="listProfil">
-                <div className="profilCard">
                     {
+
                         Array.isArray(users) && users.map((user, index)=> (
-                                <div className="contenuProfil" key={index}>
-                                    <h3>{user.name}</h3>
-                                    <h3>{user.email}</h3>
-                                    <button className="profilButton"> Voir le profil </button>
-                                </div>
+                                <Card variant="outlined" key={index}>
+                                    <CardContent>
+                                        <Typography variant="h5" component="h2" gutterBottom>
+                                            {user.name}
+                                        </Typography>
+                                        <Typography color="textSecondary" >
+                                            {user.email}
+                                        </Typography>
+                                        <Typography  color="textSecondary">
+                                            {user.sexe}
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button size="small">Voir le profil</Button>
+                                    </CardActions>
+                                </Card>
+
                         ))
 
                     }
-                </div>
             </div>
     )
 }

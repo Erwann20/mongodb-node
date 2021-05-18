@@ -1,6 +1,10 @@
 import {observer, inject} from 'mobx-react';
 import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import  './App.css'
 
 const AppContainer = ({userstore}) => {
     const [isLogin, setIsLogin] = useState(true);
@@ -10,13 +14,19 @@ const AppContainer = ({userstore}) => {
     const history = useHistory();
 
 
+
+
     const loginUser = () => {
          if (email && password) {
              const obj = {
                  "email": email,
                  "password": password
              }
-             userstore.loginUser(obj).then((e) => e && history.push('/list-profil'))
+             userstore.loginUser(obj).then((e) => {
+                 if (e) {
+                     window.location.href = "/list-profil"
+                 }
+             })
          }
     }
 
@@ -25,54 +35,59 @@ const AppContainer = ({userstore}) => {
            {
                !isLogin ?
                <div className="formRegister">
+
                    <div className="form-item">
-                       <label>Nom</label>
-                       <input onChange={(e) => user.name = e.target.value }/>
+                       <TextField  onChange={(e) => user.name = e.target.value  } id="outlined-basic" label="Nom" variant="outlined" />
                    </div>
                    <div className="form-item">
-                       <label>Email</label>
-                       <input onChange={(e) => user.email = e.target.value }/>
+                       <TextField  onChange={(e) => user.email = e.target.value  } id="outlined-basic" label="Email" variant="outlined" />
                    </div>
                    <div className="form-item">
-                       <label>Date de naissance</label>
-                       <input type="date" onChange={(e) => user.birthday = e.target.value }/>
+                       <TextField type="date" onChange={(e) => user.birthday = e.target.value  } id="outlined-basic"  variant="outlined" />
+
                    </div>
                    <div className="form-item">
-                       <label>Ville</label>
-                       <input  onChange={(e) => user.city = e.target.value }/>
+                       <TextField onChange={(e) => user.city = e.target.value  } id="outlined-basic" label="Ville" variant="outlined" />
+
                    </div>
                    <div className="form-item">
-                       <label>Sexe</label>
-                       <input onChange={(e) => user.sexe = e.target.value }/>
+                       <TextField onChange={(e) => user.sexe = e.target.value  } id="outlined-basic" label="Sexe" variant="outlined" />
                    </div>
                    <div className="form-item">
-                       <label>Mot de passe</label>
-                       <input type="password" onChange={(e) => user.password = e.target.value }/>
+                       <TextField type="password" onChange={(e) => user.password = e.target.value  } id="outlined-basic" label="Mot de passe " variant="outlined" />
                    </div>
                    <div className="form-item">
-                       <label>Confirmation mot de passe</label>
-                       <input type="password" onChange={(e) => user.confirmPassword = e.target.value }/>
+                       <TextField type="password" onChange={(e) => user.confirmPassword = e.target.value  } id="outlined-basic" label="Confirmation mot de passe" variant="outlined" />
                    </div>
-                   <button onClick={() => userstore.registerUser()}>S'enregistrer</button>
+
+                   <Button variant="contained" color="primary" onClick={() => userstore.registerUser()}>
+                       S'enregistrer
+                   </Button>
+
                </div>
                    :
                 <div className="formRegister">
                    <div className="form-item">
-                       <label>Email</label>
-                       <input onChange={(e) => setEmail(e.target.value) }/>
+                       <TextField  onChange={(e) => setEmail(e.target.value)  } id="outlined-basic" label="Email" variant="outlined" />
                    </div>
                    <div className="form-item">
-                       <label>Mot de passe</label>
-                       <input type="password" onChange={(e) => setPassword(e.target.value) }/>
+                       <TextField type="password"  onChange={(e) => setPassword(e.target.value)  } id="outlined-basic" label="Mot de passe" variant="outlined" />
                    </div>
-                    <button onClick={() => loginUser()}>Connexion</button>
+                   <Button variant="contained" color="primary" onClick={() => loginUser()}>
+                       Connexion
+                   </Button>
                </div>
            }
 
-           {
-               isLogin ? <a onClick={() => setIsLogin(!isLogin)}>Je veux m'identifié</a>
-                       : <a onClick={() => setIsLogin(!isLogin)}>Je veux me connecter</a>
-           }
+
+           <div className="toggleForm">
+               {
+                   isLogin ? <a onClick={() => setIsLogin(!isLogin)}>Je veux m'identifier</a>
+                           : <a onClick={() => setIsLogin(!isLogin)}>Je veux me connecter</a>
+               }
+           </div>
+
+
 
        </div>
     )

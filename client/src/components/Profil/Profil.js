@@ -10,18 +10,26 @@ const ProfilContainer = ({userstore}) => {
             setUser(e)
         })
     },[])
+
+    const age = (birthDate) => {
+        const diff = Date.now() - new Date(birthDate).getTime();
+        const age = new Date(diff);
+        return Math.abs(age.getUTCFullYear() - 1970);
+    }
     return(
             <>
                 {
                     user &&
                     <div className="pageProfil">
-                        <h2>Page Profil</h2>
                         <h3>Nom : {user.name}</h3>
-                        <h3>Mail : {user.email}</h3>
-                        <h3>
-                            Ville : {/*user.city*/}
-                        </h3>
-                        <h3>Passion : {/*user.passion*/}</h3>
+                        <label>Sexe : {user.sexe}</label>
+                        <label>
+                            {age(user.birthday)} ans
+                        </label>
+                        <label>Mail : {user.email}</label>
+                        <label>
+                            Ville : {user.city}
+                        </label>
                     </div>
                 }
             </>
