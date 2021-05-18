@@ -2,13 +2,19 @@ import {inject, observer} from 'mobx-react';
 import React, {useEffect, useState} from 'react';
 import "./Profil.css"
 
-const ProfilContainer = ({userstore}) => {
+const ProfilContainer = ({userstore, location}) => {
     const [user, setUser] = useState()
 
     useEffect(() => {
-        userstore.getCurrentUser().then(e=> {
-            setUser(e)
-        })
+
+        if (location.state) {
+            setUser(location.state.user)
+        } else {
+            userstore.getCurrentUser().then(e=> {
+                setUser(e)
+            })
+        }
+
     },[])
 
     const age = (birthDate) => {
