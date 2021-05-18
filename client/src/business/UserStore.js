@@ -92,4 +92,22 @@ export class UserStore {
               });
         })
     }
+
+    deleteUserByEmail(email) {
+        return new Promise((resolve) => {
+            fetch(`http://localhost:5500/auth/user`, {
+                headers: new Headers({
+                     'Content-Type': 'application/json',
+                 }),
+                redirect: 'follow',
+                method: 'DELETE',
+                body: JSON.stringify({
+                     'email': email
+                 }),
+            }).then((e) => e.json())
+              .then((res) => {
+                  resolve(res)
+              });
+        })
+    }
 }

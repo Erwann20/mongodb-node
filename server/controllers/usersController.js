@@ -138,11 +138,11 @@ exports.signin = (req, res) => {
 }
 
 exports.editProfil = (req, res) => {
-    let { name, email } = req.body; 
+    let { name, email } = req.body;
     let errors = [];
     if (!email) {
         errors.push({ email: "required" });
-    } 
+    }
     if (!emailRegexp.test(email)) {
         errors.push({ email: "invalid email" });
     }
@@ -182,6 +182,17 @@ exports.getUsers = (req, res) => {
             return res.status(500).json({ errors: "There is no users" });
         } else {
             return res.json(user)
+        }
+    })
+}
+
+exports.deleteUser = (req, res) => {
+    User.findOneAndDelete({ email: req.body.email }).then((user) => {
+        if (user){
+            return res.status(201).json({ valid: "user deleted.", code: 201 });
+        }
+        else{
+            return res.status(500).json({ errors: "bad user.", code: 500 });
         }
     })
 }

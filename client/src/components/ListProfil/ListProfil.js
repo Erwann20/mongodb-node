@@ -17,12 +17,26 @@ const ListProfilContainer = ({userstore}) => {
         })
     },[])
 
+
+    const deleteUser = (email) => {
+        userstore.deleteUserByEmail(email).then((e) => {
+            if (e.code === 201) {
+                userstore.allUsers().then(e=> {
+                    setUsers(e)
+                })
+            }
+        })
+    }
+
     return(
             <div className="listProfil">
                     {
 
                         Array.isArray(users) && users.map((user, index)=> (
                                 <Card variant="outlined" key={index}>
+                                    <CardActions>
+                                <Button size="small"  onClick={() => deleteUser(user.email)}>Supprimer</Button>
+                                    </CardActions>
                                     <CardContent>
                                         <Typography variant="h5" component="h2" gutterBottom>
                                             {user.name}
