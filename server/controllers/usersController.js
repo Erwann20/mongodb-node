@@ -7,7 +7,7 @@ const { createJWT } = require("../utils/auth");
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 exports.signup = (req, res, next) => {
-    let { name, email, password, password_confirmation, date, birthday, city, sexe } = req.body;
+    let { name, email, password, password_confirmation, birthday, city, sexe } = req.body;
     let errors = [];
 
     if (!name) {
@@ -27,9 +27,7 @@ exports.signup = (req, res, next) => {
     } if (errors.length > 0) {
         return res.status(422).json({ errors: errors });
     }
-    if (!date) {
-        errors.push({date: "required"})
-    }
+
     if (!birthday) {
         errors.push({birthday: "required"})
     }
@@ -49,7 +47,6 @@ exports.signup = (req, res, next) => {
                     name: name,
                     email: email,
                     password: password,
-                    date: date,
                     birthday: birthday,
                     city: city,
                     sexe: sexe
@@ -138,21 +135,39 @@ exports.signin = (req, res) => {
 }
 
 exports.editProfil = (req, res) => {
-    let { name, email } = req.body;
+    let { name, email, birthday, city, sexe } = req.body;
+
     let errors = [];
-    if (!email) {
+
+    if (!name) {
+        errors.push({ name: "required" });
+    } if (!email) {
         errors.push({ email: "required" });
     }
     if (!emailRegexp.test(email)) {
-        errors.push({ email: "invalid email" });
+        errors.push({ email: "invalid" });
     }
-    if (errors.length > 0) {
+   if (errors.length > 0) {
         return res.status(422).json({ errors: errors });
     }
-    let updatedUser = {
-        email: email,
-        name: name
+
+    if (!birthday) {
+        errors.push({birthday: "required"})
     }
+    if (!city) {
+        errors.push({city: "required"})
+    }
+    if (!sexe) {
+        errors.push({sexe: "required"})
+    }
+
+    let updatedUser = {
+        name: name,
+        birthday: birthday,
+        city: city,
+        sexe: sexe
+    }
+
     User.findOneAndUpdate(
         { email: email },
         { $set: updatedUser},

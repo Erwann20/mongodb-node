@@ -1,9 +1,8 @@
-.formRegister .form-item {
-    margin-bottom: 1rem;
-}
 
-.formRegister .form-item  .MuiTextField-root {
-    width: 30vh !important;
+
+ .MuiTextField-root {
+     width: 30vh !important;
+     margin: 1rem 0 !important;
 }
 
 .formRegister Button {
