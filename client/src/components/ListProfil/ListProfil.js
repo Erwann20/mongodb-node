@@ -44,35 +44,40 @@ const ListProfilContainer = ({userstore}) => {
     }
 
     return(
+        <>
+            <Typography variant="h5" component="h1" gutterBottom class="title">
+                Liste des utilisateurs
+            </Typography>
             <div className="listProfil">
-                    { redirect && redirect}
-                    {
+                { redirect && redirect}
+                {
 
-                        Array.isArray(users) && users.map((user, index)=> (
-                                <Card variant="outlined" key={index}>
-                                    <CardActions>
-                                <Button size="small"  onClick={() => deleteUser(user.email)}>Supprimer</Button>
-                                    </CardActions>
-                                    <CardContent>
-                                        <Typography variant="h5" component="h2" gutterBottom>
-                                            {user.name}
-                                        </Typography>
-                                        <Typography color="textSecondary" >
-                                            {user.email}
-                                        </Typography>
-                                        <Typography  color="textSecondary">
-                                            {user.sexe}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button onClick={() => redirectSpecifyProfil(user.email)}  size="small">Voir le profil</Button>
-                                    </CardActions>
-                                </Card>
+                    Array.isArray(users) && users.map((user, index)=> (
+                            <Card variant="outlined" key={index}>
+                                <CardActions>
+                                </CardActions>
+                                <CardContent>
+                                    <Typography variant="h5" component="h2" gutterBottom>
+                                        {user.name}
+                                    </Typography>
+                                    <Typography color="textSecondary" >
+                                        {user.email}
+                                    </Typography>
+                                    <Typography  color="textSecondary">
+                                        {user.sexe}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button onClick={() => redirectSpecifyProfil(user.email)}  size="small">Voir le profil</Button>
+                                    <Button size="small"  onClick={() => deleteUser(user.email)}>Supprimer</Button>
+                                </CardActions>
+                            </Card>
 
-                        ))
+                    ))
 
-                    }
+                }
             </div>
+        </>
     )
 }
 

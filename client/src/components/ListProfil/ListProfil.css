@@ -6,6 +6,10 @@
     margin-top: 2rem;
 }
 
+.title {
+    margin: 1rem 0;
+}
+
 .MuiCard-root {
     overflow: hidden;
     width: 45%;

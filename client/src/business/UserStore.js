@@ -15,6 +15,9 @@ export class UserStore {
         return this._userRegister;
     }
 
+    set userRegister(user) {
+        this._userRegister = user;
+    }
     get userIsSave() {
         return this._userIsSave;
     }
@@ -130,6 +133,31 @@ export class UserStore {
               .then((res) => {
                   resolve(res)
               });
+        })
+    }
+
+    modifyUser() {
+        const obj = {
+            "name": this._userRegister.name,
+            "email": this._userRegister.email,
+            "password": this._userRegister.password,
+            "password_confirmation": this._userRegister.confirmPassword,
+            "birthday": this._userRegister.birthday,
+            "city": this._userRegister.city,
+            "sexe": this._userRegister.sexe
+        }
+        return new Promise((resolve) => {
+                fetch(`http://localhost:5500/auth/edituser`, {
+                    headers: new Headers({
+                         'Content-Type': 'application/json',
+                     }),
+                    redirect: 'follow',
+                    method: 'PUT',
+                    body: JSON.stringify(obj),
+                }).then((e) => e.json())
+                  .then((res) => {
+                      resolve(res)
+                  });
         })
     }
 }
