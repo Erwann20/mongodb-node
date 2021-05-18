@@ -6,7 +6,7 @@ const { signup, signin, getUser, getUsers, editProfil } = require('../controller
 
 router.post('/signup', signup);
 router.post('/signin', signin);
-router.get('/userByEmail', getUser);
+router.post('/userByEmail', getUser);
 router.get('/users', getUsers);
 router.put('/edituser', editProfil);
 
