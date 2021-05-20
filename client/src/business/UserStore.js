@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 export class UserStore {
     _userRegister;
     _userIsSave = false;
+    ;
 
     constructor() {
         this._userRegister = new User()
@@ -158,6 +159,24 @@ export class UserStore {
                   .then((res) => {
                       resolve(res)
                   });
+        })
+    }
+
+    countUsers() {
+        return new Promise((resolve) => {
+
+            fetch('http://localhost:5500/auth/countUser', {
+                headers: new Headers({
+                                         'Content-Type': 'application/json',
+                                     }),
+                redirect: 'follow',
+                method: 'GET',
+            }).then((e) => e.json())
+              .then((res) => {
+                  if (res.count > 0) {
+                      resolve(res.count);
+                  }
+              });
         })
     }
 }

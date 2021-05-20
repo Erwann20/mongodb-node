@@ -207,7 +207,16 @@ exports.deleteUser = (req, res) => {
             return res.status(201).json({ valid: "user deleted.", code: 201 });
         }
         else{
-            return res.status(500).json({ errors: "bad user.", code: 500 });
+        }
+    })
+}
+
+exports.countUser = (req, res) => {
+    User.countDocuments().then((count) => {
+        if (count > 0) {
+            return res.json({count})
+        } else {
+            return res.status(500).json({ errors: "0 users.", code: 500 });
         }
     })
 }
