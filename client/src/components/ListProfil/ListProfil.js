@@ -11,12 +11,16 @@ import "./ListProfil.css"
 
 const ListProfilContainer = ({userstore}) => {
     const [users, setUsers] = useState();
+    const [count, setCount] = useState();
     const [redirect, setRedirect] = useState();
 
     useEffect(() => {
         userstore.allUsers().then(e=> {
             setUsers(e)
         })
+
+        userstore.countUsers().then((count) => setCount(count))
+
     },[])
 
 
@@ -46,7 +50,7 @@ const ListProfilContainer = ({userstore}) => {
     return(
         <>
             <Typography variant="h5" component="h1" gutterBottom class="title">
-                Liste des utilisateurs
+                Liste des utilisateurs <span>(Nombre: {count})</span>
             </Typography>
             <div className="listProfil">
                 { redirect && redirect}
