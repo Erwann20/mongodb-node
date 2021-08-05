@@ -1,4 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://lucaslg:24NqHpwAiV9xqxd@cluster0.nywfq.mongodb.net/appHome?retryWrites=true&w=majority",
-    "jwtSecret": "gergdfg51d6gd,!!rgdg65dr1gd53rg1d63rg"
+    "mongoURI": "mongoUri",
+    "jwtSecret": "jwtSecret"
   }
